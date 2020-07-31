@@ -29,7 +29,7 @@ Sample data illustrating placed orders.
 ## Caveats
 
 - Merging data from different CSVs
-    - This package assumes that all data for a given EVENT is contained in a given row of the csv; any merging of disparate tables needs to be done upstream of this package. For an automated workflow that can help you with this, see 
+    - This package assumes that all data for a given EVENT is contained in a given row of the csv; any merging of disparate tables needs to be done upstream of this package. For an automated workflow that can help you with this, see `Further Available Automations` below
     - PROFILE properties can be sent piecemeal. For example: if you have one csv that has placed order events with a shipping address, you can use that to update a user's address, even if you are using another table to update the rest of the the user's info (phone, name, etc)
 - Config Formatting
     - Each Event/Profile mapping uses the standard python dictionary format (follow example in `config.py`)
