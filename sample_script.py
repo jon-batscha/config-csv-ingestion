@@ -1,9 +1,11 @@
 from utils import *
 import config
 
+filename = sys.argv[1]
+
 # generate list of payloads from csv
-events = csv_to_payloads(config.public_key, config.event_mapping,'sample_orders.csv')
-profiles = csv_to_payloads(config.public_key, config.profile_mapping,'sample_orders.csv')
+events = csv_to_payloads(config.public_key, config.event_mapping,filename)
+profiles = csv_to_payloads(config.public_key, config.profile_mapping,filename)
 
 # send all events to klaviyo using all cores, and save responses
 event_responses = parallelize(send_event_payload, events)

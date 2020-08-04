@@ -2,6 +2,12 @@
 
 At a high-level, this package enables a user to send events/profiles directly to Klaviyo via Python3 using just a CSV file, a config, and a few lines of code. This package is a custom addition the Sales Engineering Team built atop the productized API to serve customers with unique data needs.
 
+## To run sample:
+
+- Configure `config.py`
+- Place csv in package directory
+- run `python sample_script.py sample_orders.csv`
+
 ## Component files:
 
 ### `utils.py`
@@ -29,7 +35,7 @@ Sample data illustrating placed orders.
 ## Caveats
 
 - Merging data from different CSVs
-    - This package assumes that all data for a given EVENT is contained in a given row of the csv; any merging of disparate tables needs to be done upstream of this package. For an automated workflow that can help you with this, see `Further Available Automations` below
+    - This package assumes that all data for a given EVENT is contained in a given row of the csv; any merging of disparate tables needs to be done upstream of this package. For an automated workflow that can help you with this, see `Further Available Automations` below.
     - PROFILE properties can be sent piecemeal. For example: if you have one csv that has placed order events with a shipping address, you can use that to update a user's address, even if you are using another table to update the rest of the the user's info (phone, name, etc)
 - Config Formatting
     - Each Event/Profile mapping uses the standard python dictionary format (follow example in `config.py`)
