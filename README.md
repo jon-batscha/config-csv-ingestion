@@ -32,7 +32,7 @@ This file contains a sample script that:
 
 Sample data illustrating placed orders.
 
-## Caveats
+## Notes
 
 - Merging data from different CSVs
     - This package assumes that all data for a given EVENT is contained in a given row of the csv; any merging of disparate tables needs to be done upstream of this package. For an automated workflow that can help you with this, see `Further Available Automations` below.
