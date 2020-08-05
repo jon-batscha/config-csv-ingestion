@@ -58,8 +58,8 @@ Sample data illustrating placed orders.
 
 
 ## Further Available Automations
-- From Snowflake: Reach out to our Sales Eng Team; we have a working solution that is in the process of being further documented/productized for easy sharing
-- Automatic ingestion of data triggered by file upload: Reach out to the Sales Eng Team; we have a working solution that is in the process of being further documented/productized for easy sharing
+- From Snowflake: https://github.com/jon-batscha/snowflake-workflow
+- Automatic ingestion of data from file: https://github.com/jon-batscha/s3_triggered_ingestion
 
 ## System Reqs
 
