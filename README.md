@@ -12,7 +12,7 @@ At a high-level, this package enables a user to send events/profiles directly to
 
 ### `utils.py`
 
-This file defines a few functions, (some intended for the user, along with helper functions). Using these pre-built functions, a user can send custom events to klaviyo from a CSV at scale in just a few lines of code (see: `sample_script.py`)
+This file defines a few functions, (some intended for the user, along with internal helper functions). Using these pre-built functions, a user can send custom events to klaviyo from a CSV at scale in just a few lines of code (see: `sample_script.py`)
 
 NOTE: do not make any changes to `utils.py`.
 
@@ -26,7 +26,7 @@ NOTE: change the public_key to your account's, and update the event/profile mapp
 
 This file contains a sample script that:
 1. generates event and profiles payloads from `sample_orders.csv`
-2. send those payloads to klaviyo using all cores
+2. sends those payloads to klaviyo using all cores
 
 ### `sample_orders.csv`
 
@@ -36,11 +36,11 @@ Sample data illustrating placed orders.
 
 - ##### Merging data from different CSVs
     - This package assumes that all data for a given EVENT is contained in a given row of the csv; any merging of disparate tables needs to be done upstream of this package. For an automated workflow that can help you with this, see `Further Available Automations` below.
-    - PROFILE properties can be sent piecemeal. For example: if you have one csv that has placed order events with a shipping address, you can use that to update a user's address, even if you are using another table to update the rest of the the user's info (phone, name, etc)
+    - PROFILE properties can be sent piecemeal. For example: if you have one csv that has placed order events with a shipping address, you can use that to update a user's address, even if you are using another table to update the rest of the the user's info (phone, name, etc). This is because profiles can be updated piecemeal in Klaviyo.
     
 - ##### Config Formatting
-    - Each Event/Profile mapping uses the standard python dictionary format (follow example in `config.py`)
-    - each config key and value must be a string (no boolean/None type allowed)
+    - Each Event/Profile mapping uses the standard python dictionary format (follow example in `config.py`). A JSON option is in the works.
+    - Each config key and value must be a string
     - Events and profiles must have `$email` set
     - Events must have `event` set
     - Additionally, we STRONGLY suggest to set the following properties for events:
@@ -50,11 +50,11 @@ Sample data illustrating placed orders.
 - ##### Timestamps:
     - Every event in Klaviyo must have a `'time'` attribute; profile properties do not 
     - Klaviyo accepts timestamps in either of the following formats: `ISO string` or `UNIX timestamp`; other formats will cause errors
-    - If there is no `'time'` attribute in your csv that is mapped in your config, this code will add the current timestamp (using the computer's local time) to any event you send; regardless, it is highly incouraged to set an actual time field
+    - If there is no `'time'` attribute in your csv that is mapped in your config, this code will add the current timestamp (using the computer's local time) to any event you send; regardless, it is strongly encouraged to set an actual time field
     
 - ##### Duplicate events
     - Klaviyo de-dupes events that have the same `'event'`, `'$email'`, `'timestamp'`; for this reason, we advise you to include a unique `'$event_id'` to every event (most CRM's do this by default)
-    - If the config has no `'$event_id'` set, this package will automatically add one using the following formula: `abs(hash(string(payload)))`; for this reason, events that are identical (considering only the mapped fields!) will have the same hash and thus will be de-duped
+    - If the config has no `'$event_id'` set, this package will automatically add one using the following formula: `abs(hash(string(payload)))`; for this reason, events that are identical (considering only the mapped fields) will have the same hash and thus will be de-duped
     
 - ##### Event/Profile Properties
     - Certain properties enable pre-built functionality in Klaviyo
