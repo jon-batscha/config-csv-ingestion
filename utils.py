@@ -82,7 +82,7 @@ def set_timestamp(payload):
     '''
 
     if 'time' not in payload.keys():
-        payload['time'] = int(time.time())
+        payload['time'] = '' #int(time.time())
     elif payload['time'].isnumeric():
         payload['time'] = int(payload['time'])
     else:
@@ -98,17 +98,23 @@ def set_event_id(payload):
     action: sets $event_id according to logic laid out in docs
     '''
 
-    if '$event_id' not in payload.keys():
+    input: payload for event
+    ouput: None
+    action: sets $event_id according to logic laid out in docs
+    '''
 
-        payload['$event_id'] = abs(hash(str(payload)))
+    if '$event_id' not in payload['properties'].keys():
 
-    elif not payload['$event_id']:
+        payload['properties']['$event_id'] = str(abs(hash(str(payload))))
 
-            del payload['$event_id']
+    elif not payload['properties']['$event_id'] or payload['properties']['$event_id'] == '':
 
-            payload['$event_id'] = abs(hash(str(payload)))
+        del payload['properties']['$event_id']
+
+        payload['properties']['$event_id'] = str(abs(hash(str(payload))))
 
     return payload
+
 
 
 def csv_to_payloads(public_key, mapping, filepath):
