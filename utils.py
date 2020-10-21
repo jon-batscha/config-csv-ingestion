@@ -98,11 +98,6 @@ def set_event_id(payload):
     action: sets $event_id according to logic laid out in docs
     '''
 
-    input: payload for event
-    ouput: None
-    action: sets $event_id according to logic laid out in docs
-    '''
-
     if '$event_id' not in payload['properties'].keys():
 
         payload['properties']['$event_id'] = str(abs(hash(str(payload))))
